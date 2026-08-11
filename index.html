@@ -79,6 +79,12 @@
     backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,0.05), 0 8px 20px -12px rgba(94,234,212,0.4);
     font-weight:600;color:var(--accent);
   }
+  .hero-mobile-card{display:none;background:linear-gradient(135deg, rgba(94,234,212,0.12), rgba(129,140,248,0.10) 55%, rgba(244,114,182,0.08));backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(148,163,184,0.16);border-radius:24px;position:relative;overflow:hidden;isolation:isolate;box-shadow:0 30px 60px -30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.04);margin-bottom:26px;}
+  .mobile-meta{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:10px;width:100%;flex-wrap:nowrap;}
+  .mobile-top-row{display:flex;align-items:center;gap:14px;width:100%;min-width:0;}
+  .hero-mobile-card .mobile-top-row .avatar{margin-right:6px;}
+  .hero-mobile-card .hero-text{min-width:0;}
+  .mobile-meta a,.mobile-meta .pill-tag{max-width:100%;overflow-wrap:anywhere;word-break:break-word;white-space:nowrap;}
   .exp-badge{font-variant-numeric:tabular-nums;letter-spacing:0.2px;}
   .scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));z-index:9999;box-shadow:0 0 18px rgba(94,234,212,0.45);}
   .section-glow{position:relative;overflow:hidden;}
@@ -103,6 +109,16 @@
     .certs-panel{order:4;}
     .sidebar .panel:last-of-type{flex:none;justify-content:flex-start;}
   }
+  @media(max-width:640px){
+    .hero.reveal-on-scroll{display:none !important;}
+    .hero-mobile-card.reveal-on-scroll{display:flex !important;flex-direction:column;align-items:flex-start;gap:12px;padding:18px 14px;border-radius:16px;}
+    .hero-mobile-card .avatar{width:72px;height:72px;font-size:1.6rem;border-width:3px;}
+    .hero-mobile-card .hero-text{min-width:0;width:100%;}
+    .hero-mobile-card h1{font-size:1.1rem;line-height:1.12;margin:0 0 2px;word-break:break-word;}
+    .hero-mobile-card .role{font-size:0.9rem;line-height:1.35;color:var(--accent);font-weight:600;white-space:normal;margin-bottom:8px;}
+    .hero-mobile-card .hero-meta{margin-top:8px;gap:10px;}
+  }
+
   @media(max-width:640px){
     .page{padding:22px 14px 56px;}
     .hero{padding:22px 18px;border-radius:16px;gap:18px;}
@@ -258,6 +274,19 @@
         <a href="mailto:sumitkumarbeniwal@gmail.com">✉️ sumitkumarbeniwal@gmail.com</a>
         <span class="pill-tag exp-badge" data-years="8">8+ yrs experience</span>
       </div>
+    </div>
+  </div>
+
+  <div class="hero-mobile-card reveal-on-scroll">
+    <div class="mobile-top-row">
+      <div class="avatar">SK</div>
+      <div class="hero-text">
+        <h1>Sumit Kumar</h1>
+        <div class="role">Senior Software Developer</div>
+      </div>
+    </div>
+    <div class="hero-meta mobile-meta">
+      <a href="tel:+919694838807">📞 +91-9694838807</a>
     </div>
   </div>
 
