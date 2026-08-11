@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumit Kumar - Senior Software Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #fafafa;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #0d0d0d;
+                color: #e5e5e5;
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            header {
+                border-bottom-color: #2a2a2a;
+            }
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            font-size: 18px;
+            color: #0066cc;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .title {
+                color: #4da6ff;
+            }
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .contact-item a {
+                color: #4da6ff;
+            }
+        }
+
+        section {
+            margin-bottom: 35px;
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 16px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            h2 {
+                color: #fff;
+            }
+        }
+
+        .job, .education-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .job:last-child, .education-item:last-child {
+            border-bottom: none;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .job, .education-item {
+                border-bottom-color: #2a2a2a;
+            }
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 5px;
+        }
+
+        .job-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .job-title {
+                color: #fff;
+            }
+        }
+
+        .job-meta {
+            font-size: 14px;
+            color: #666;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .job-meta {
+                color: #999;
+            }
+        }
+
+        .job-details {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .job-details {
+                color: #999;
+            }
+        }
+
+        .job ul {
+            list-style: none;
+            margin: 10px 0;
+        }
+
+        .job li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 14px;
+        }
+
+        .job li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .job li:before {
+                color: #4da6ff;
+            }
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .skill-category {
+                background: #1a1a1a;
+            }
+        }
+
+        .skill-category h3 {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #0066cc;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .skill-category h3 {
+                color: #4da6ff;
+            }
+        }
+
+        .skill-category p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .skill-category p {
+                color: #ccc;
+            }
+        }
+
+        .education-item h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #000;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .education-item h3 {
+                color: #fff;
+            }
+        }
+
+        .education-meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .education-meta {
+                color: #999;
+            }
+        }
+
+        .cert-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .cert-item {
+            background: #f5f5f5;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            border-left: 3px solid #0066cc;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .cert-item {
+                background: #1a1a1a;
+                border-left-color: #4da6ff;
+            }
+        }
+
+        .print-link {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .print-link {
+                border-top-color: #2a2a2a;
+            }
+        }
+
+        .print-link a {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .print-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            .print-link {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sumit Kumar</h1>
+            <p class="title">Senior Software Developer</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <a href="mailto:sumitkumarbeniwal@gmail.com">sumitkumarbeniwal@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <a href="tel:+919694838807">+91-9694838807</a>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>Bangalore, India</span>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <h2>Professional Summary</h2>
+            <p>Senior Software Developer with 8+ years of expertise in full-stack development, enterprise security, and system design and architecture. Proven track record at AIRBUS, HCL, and TCS delivering mission-critical applications for Fortune 500 clients. Specialized in .NET, VueJS, Python, Catia and SSO/Identity Management (OIDC, OAuth 2.0). Skilled in optimizing performance, reducing costs, implementing enterprise authentication solutions, and leading cross-functional teams.</p>
+        </section>
+
+        <section>
+            <h2>Core Competencies</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <p>C#, JavaScript, Python, HTML5, CSS3</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Frameworks</h3>
+                    <p>.NET, ASP.NET, Vue.js</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Cloud & DevOps</h3>
+                    <p>Azure, CI/CD Pipelines</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Data</h3>
+                    <p>SQL Server, PostgreSQL, Oracle, SSIS, Apache Airflow</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Security & Auth</h3>
+                    <p>OIDC, OAuth 2.0, Mobile SSO, Multi-Factor Auth</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Architecture</h3>
+                    <p>MVC, Microservices, RESTful APIs, Orchestration</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools</h3>
+                    <p>Git, Visual Studio, VS Code, JIRA, TFS</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Leadership</h3>
+                    <p>Team Management, Requirement Analysis, Client Relations</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Professional Experience</h2>
+            
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title">Senior Software Developer</div>
+                    <div class="job-meta">December 2022 – Present</div>
+                </div>
+                <div class="job-details">AIRBUS, Bangalore, India</div>
+                <ul>
+                    <li>Leading Airbus Data Exchange process for commercial and defense sectors, managing CATIA V5 model migrations and drawing transfers</li>
+                    <li>Implemented Multiple Data Conversion Over the Catia tool like Catia V4-V5 conversion including CADDS data</li>
+                    <li>Designed and implemented Mobile Single Sign-On (SSO) authentication framework using OIDC and OAuth 2.0 protocols with end-to-end secure configuration</li>
+                    <li>Built comprehensive Identity and Access Management (IAM) solution featuring multi-factor authentication and secure token protection</li>
+                    <li>Implemented Apache Airflow orchestration service, reducing licensing costs by 40% and increasing efficiency by 35%</li>
+                    <li>Migrated SVN code repository with 20+ years of code history to GitHub repository</li>
+                    <li>Managed cross-functional collaboration between AIRBUS units and manufacturing suppliers across multiple geographies</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title">Senior Software Engineer</div>
+                    <div class="job-meta">April 2022 – November 2022</div>
+                </div>
+                <div class="job-details">HCL Technologies, Gurugram, India</div>
+                <ul>
+                    <li>Built core VueJS templates for cross-domain integration deployed in Samsung global platforms</li>
+                    <li>Implemented REST service consumption improving data availability for enterprise web applications</li>
+                    <li>Collaborated on PSS module development at Samsung SDS and analyzed client requirements</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title">Software Developer</div>
+                    <div class="job-meta">May 2019 – March 2022</div>
+                </div>
+                <div class="job-details">Tata Consultancy Services, Noida, India</div>
+                <ul>
+                    <li>Developed and implemented HUMANA INC.'s Inspire module using MVC architecture</li>
+                    <li>Designed and built SSIS packages for complex data integration and ETL processes</li>
+                    <li>Developed MVC architecture based applications with .Net and VueJS for large-scale active users</li>
+                    <li>Managed complete SDLC phases including design, implementation, testing, deployment, and maintenance</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div class="job-title">Software Developer</div>
+                    <div class="job-meta">April 2018 – April 2019</div>
+                </div>
+                <div class="job-details">Tata Consultancy Services, Pune, India</div>
+                <ul>
+                    <li>Developed backend, UI code, and comprehensive unit test cases for enterprise applications</li>
+                    <li>Conducted full-cycle SDLC management with client requirement gathering and technical specification analysis</li>
+                    <li>Collaborated on Trade, EDM, Invoice, and ZCS modules within ZYNERGY system</li>
+                    <li>Implemented RESTful services and MVC architecture for multiple enterprise modules</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            
+            <div class="education-item">
+                <h3>Doctor of Philosophy in Artificial Intelligence</h3>
+                <div class="education-meta">Birla Institute of Technology And Science, PILANI | Research Ongoing</div>
+            </div>
+
+            <div class="education-item">
+                <h3>Master of Technology in Computer Science</h3>
+                <div class="education-meta">Rajasthan Technical University, Jaipur | January 2025</div>
+            </div>
+
+            <div class="education-item">
+                <h3>Bachelor of Technology in Computer Science & Engineering</h3>
+                <div class="education-meta">Rajasthan Technical University, Kota | August 2017</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Certifications</h2>
+            <div class="cert-list">
+                <div class="cert-item">Microsoft Certified Solutions Associate (MCSA) – Web Applications</div>
+                <div class="cert-item">Microsoft Certification Exam 70-486: Developing ASP.NET Web Applications</div>
+                <div class="cert-item">Microsoft Certification Exam 70-483: Programming in C#</div>
+            </div>
+        </section>
+
+        <div class="print-link">
+            <a href="javascript:window.print()">🖨️ Print or save as PDF</a>
+        </div>
+    </div>
+</body>
+</html>
