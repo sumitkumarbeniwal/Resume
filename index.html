@@ -36,8 +36,12 @@
   .hero{
     display:flex;flex-wrap:wrap;align-items:center;gap:24px;
     background:linear-gradient(135deg, rgba(94,234,212,0.10), rgba(129,140,248,0.10));
-    border:1px solid var(--border);border-radius:20px;padding:34px 36px;margin-bottom:36px;
+    border:1px solid var(--border);border-radius:20px;padding:34px 36px;margin-bottom:26px;
+    position:relative;overflow:hidden;isolation:isolate;
   }
+  .hero::before{content:'';position:absolute;inset:-40% auto auto -10%;width:240px;height:240px;background:radial-gradient(circle, rgba(129,140,248,0.16), transparent 60%);z-index:-1;animation:floatGlow 9s ease-in-out infinite;}
+  .hero::after{content:'';position:absolute;right:-60px;bottom:-80px;width:220px;height:220px;background:radial-gradient(circle, rgba(94,234,212,0.14), transparent 60%);z-index:-1;animation:floatGlow 11s ease-in-out infinite reverse;}
+  @keyframes floatGlow{0%,100%{transform:translateY(0) translateX(0);}50%{transform:translateY(-12px) translateX(8px);}}
   .avatar{
     width:88px;height:88px;border-radius:50%;flex-shrink:0;
     background:linear-gradient(135deg,var(--accent),var(--accent2));
@@ -49,7 +53,13 @@
   .hero-meta{display:flex;flex-wrap:wrap;gap:14px;font-size:0.88rem;color:var(--muted);}
   .hero-meta span, .hero-meta a{display:flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;}
   .hero-meta a:hover{color:var(--accent);}
-  .pill-tag{background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:3px 10px;border-radius:20px;}
+  .pill-tag{background:rgba(255,255,255,0.06);border:1px solid rgba(94,234,212,0.18);padding:6px 12px;border-radius:999px;backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,0.05);}
+  .exp-badge{font-variant-numeric:tabular-nums;letter-spacing:0.2px;}
+  .scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));z-index:9999;box-shadow:0 0 18px rgba(94,234,212,0.45);}
+  .section-glow{position:relative;overflow:hidden;}
+  .section-glow::after{content:'';position:absolute;inset:auto -20% -65% auto;width:180px;height:180px;background:radial-gradient(circle, rgba(94,234,212,0.08), transparent 60%);pointer-events:none;}
+  .reveal-on-scroll{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease, transform 0.65s ease;}
+  .reveal-on-scroll.visible{opacity:1;transform:translateY(0);}
 
   .layout{display:grid;grid-template-columns:1fr 2.1fr;gap:28px;align-items:stretch;}
   .sidebar{display:flex;flex-direction:column;height:100%;}
@@ -60,8 +70,12 @@
     .page{padding:32px 18px 72px;}
     .hero{padding:28px 24px;}
     .hero-text h1{font-size:2rem;}
-    .layout{grid-template-columns:1fr;gap:22px;}
-    .sidebar, .main{height:auto;}
+    .layout{grid-template-columns:1fr;gap:22px;display:flex;flex-direction:column;}
+    .sidebar, .main{display:contents;}
+    .skills-panel{order:1;}
+    .experience-panel{order:2;}
+    .education-panel{order:3;}
+    .certs-panel{order:4;}
     .sidebar .panel:last-of-type{flex:none;justify-content:flex-start;}
   }
   @media(max-width:640px){
@@ -89,6 +103,7 @@
 
   .summary{color:var(--muted);font-size:0.96rem;}
   .summary-row{margin-bottom:28px;}
+  .summary-row .summary{max-width:92ch;}
 
   .skill-block{margin-bottom:16px;}
   .skill-block:last-child{margin-bottom:0;}
@@ -116,8 +131,15 @@
   .edu-item:last-child, .cert-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
   .edu-title{font-weight:700;color:var(--text);font-size:0.95rem;}
   .edu-meta{color:var(--muted);font-size:0.82rem;margin-top:2px;}
+  .edu-link{display:block;text-decoration:none;border-bottom:none;color:inherit;cursor:pointer;transition:transform 0.25s ease, opacity 0.25s ease;}
+  .edu-link:hover{transform:translateX(3px);}
+  .edu-link:hover .edu-title{color:var(--accent);}
+  .edu-link:visited{color:inherit;}
   .cert-item{font-size:0.88rem;color:#cfd4de;display:flex;gap:8px;}
   .cert-item::before{content:'\1F3C6';flex-shrink:0;}
+  .cert-link{text-decoration:none;cursor:pointer;transition:color 0.25s ease, transform 0.25s ease;}
+  .cert-link:hover{color:var(--accent);transform:translateX(3px);}
+  .cert-link:visited{color:#cfd4de;}
 
   footer{text-align:center;color:var(--muted);font-size:0.8rem;margin-top:40px;}
 
@@ -178,23 +200,24 @@
 </style>
 </head>
 <body>
+<div class="scroll-progress" aria-hidden="true"></div>
 <div class="page">
 
-  <div class="hero">
+  <div class="hero reveal-on-scroll">
     <div class="avatar">SK</div>
     <div class="hero-text">
       <h1>Sumit Kumar</h1>
-      <div class="role">Senior Software Developer &mdash; Full-Stack, Enterprise Security &amp; CATIA Automation</div>
+      <div class="role">Senior Software Developer - Full-Stack, Enterprise Security &amp; CAD-PLM Automation</div>
       <div class="hero-meta">
         <span>📍 Bengaluru, Karnataka, India</span>
         <a href="tel:+919694838807">📞 +91-9694838807</a>
         <a href="mailto:sumitkumarbeniwal@gmail.com">✉️ sumitkumarbeniwal@gmail.com</a>
-        <span class="pill-tag">8+ yrs experience</span>
+        <span class="pill-tag exp-badge" data-years="8">8+ yrs experience</span>
       </div>
     </div>
   </div>
 
-  <div class="panel summary-row">
+  <div id="summary" class="panel summary-row section-glow reveal-on-scroll">
     <h2>Summary</h2>
     <p class="summary">
       Senior Software Developer with 8+ years of expertise in full-stack development, enterprise
@@ -209,7 +232,7 @@
     <!-- LEFT SIDEBAR -->
     <div class="sidebar">
 
-      <div class="panel">
+      <div id="skills" class="panel skills-panel section-glow reveal-on-scroll">
         <h2>Core Skills</h2>
 
         <div class="skill-block">
@@ -269,34 +292,34 @@
         </div>
       </div>
 
-      <div class="panel">
+      <div id="education" class="panel education-panel section-glow reveal-on-scroll">
         <h2>Education</h2>
-        <div class="edu-item">
+        <a class="edu-item edu-link" href="https://www.bits-pilani.ac.in/" target="_blank" rel="noopener noreferrer">
           <div class="edu-title">Ph.D. in Artificial Intelligence</div>
           <div class="edu-meta">BITS Pilani &middot; Research Ongoing</div>
-        </div>
-        <div class="edu-item">
+        </a>
+        <a class="edu-item edu-link" href="https://www.aryacollege.in/" target="_blank" rel="noopener noreferrer">
           <div class="edu-title">M.Tech, Computer Science</div>
           <div class="edu-meta">Rajasthan Technical University, Jaipur &middot; Jan 2025</div>
-        </div>
-        <div class="edu-item">
+        </a>
+        <a class="edu-item edu-link" href="https://bkbiet.ac.in/" target="_blank" rel="noopener noreferrer">
           <div class="edu-title">B.Tech, Computer Science &amp; Engineering</div>
           <div class="edu-meta">Rajasthan Technical University, Kota &middot; Aug 2017</div>
-        </div>
+        </a>
       </div>
 
-      <div class="panel">
+      <div id="certifications" class="panel certs-panel section-glow reveal-on-scroll">
         <h2>Certifications</h2>
-        <div class="cert-item">Microsoft Certified Solutions Associate (MCSA) &mdash; Web Applications</div>
-        <div class="cert-item">Exam 70-486: Developing ASP.NET Web Applications</div>
-        <div class="cert-item">Exam 70-483: Programming in C#</div>
+        <a class="cert-item cert-link" href="https://www.credly.com/badges/e2832907-729c-4745-b485-f45a83db9f3a/linked_in_profile" target="_blank" rel="noopener noreferrer">Microsoft Certified Solutions Associate (MCSA) &mdash; Web Applications</a>
+        <a class="cert-item cert-link" href="https://www.credly.com/badges/fff58a0c-8c21-4ed6-8644-de4cf64ba110/linked_in_profile" target="_blank" rel="noopener noreferrer">Exam 70-486: Developing ASP.NET Web Applications</a>
+        <a class="cert-item cert-link" href="https://www.credly.com/badges/1251472b-67b3-4670-b4fb-69dba1502cbe/linked_in_profile" target="_blank" rel="noopener noreferrer">Exam 70-483: Programming in C#</a>
       </div>
 
     </div>
 
     <!-- RIGHT MAIN COLUMN -->
     <div class="main">
-      <div class="panel">
+      <div id="experience" class="panel experience-panel section-glow reveal-on-scroll">
         <h2>Professional Experience</h2>
 
         <div class="job">
@@ -313,7 +336,7 @@
             <li>Configured secure cross-domain SSO flow for AIRBUS global applications per enterprise security standards</li>
             <li>Implemented Apache Airflow orchestration, cutting licensing costs by 40% and boosting efficiency by 35%</li>
             <li>Optimized IBM LSF 9/10 configuration for workload distribution, speeding up Python and shell script execution</li>
-            <li>Migrated 20+ years of SVN code history to GitHub</li>
+            <li>Migrated 15+ years of SVN code history to GitHub</li>
             <li>Managed cross-functional collaboration between AIRBUS units and manufacturing suppliers across geographies</li>
             <li>Implemented data transformation and orchestration using PROSTEP OpenDXM 6.3 and 6.7</li>
           </ul>
@@ -369,5 +392,37 @@
   <footer>&copy; 2026 Sumit Kumar</footer>
 
 </div>
+<script>
+  const progress = document.querySelector('.scroll-progress');
+  const badge = document.querySelector('.exp-badge');
+  const revealItems = document.querySelectorAll('.reveal-on-scroll');
+
+  const updateProgress = () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progress.style.width = pct + '%';
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.12 });
+  revealItems.forEach(item => observer.observe(item));
+
+  if (badge) {
+    const max = Number(badge.dataset.years || 8);
+    let current = 0;
+    const timer = setInterval(() => {
+      current += 1;
+      badge.textContent = current + '+ yrs experience';
+      if (current >= max) clearInterval(timer);
+    }, 90);
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
 </body>
 </html>
